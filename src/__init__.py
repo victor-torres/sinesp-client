@@ -47,7 +47,7 @@ class SinespClient(object):
 
         # Read and store XML template for our HTTP request body.
         body_file = open(os.path.join(os.path.dirname(__file__), 'body.xml'))
-        self.body = body_file.read().replace('\n', ' ').replace('  ', '')
+        self._body = body_file.read().replace('\n', ' ').replace('  ', '')
         body_file.close()
 
 
@@ -79,7 +79,7 @@ class SinespClient(object):
         latitude = self._rand_latitude()
         longitude = self._rand_longitude()
         # Filling our body template
-        body = self.body % (token, latitude, longitude, plate)
+        body = self._body % (token, latitude, longitude, plate)
         # General info
         header = 'POST /sinesp-cidadao/ConsultaPlacaNovo27032014 HTTP/1.1\n'
         host = 'Host: sinespcidadao.sinesp.gov.br\n'
@@ -92,18 +92,18 @@ class SinespClient(object):
 
 
     def _request(self, content):
-        """Performs and HTTP request with a given content."""
+        """Performs an HTTP request with a given content."""
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((URL, 80))
         s.send(content)
-        result = ''
+        response = ''
         buf = s.recv(32)
         while len(buf):
-            result += buf
+            response += buf
             buf = s.recv(32)
 
         s.close()
-        return result
+        return response
         
         
     def _parse(self, response):
@@ -114,7 +114,7 @@ class SinespClient(object):
         return_tag = 'return'
 
         try:
-            xml = result.split('charset=UTF-8\r\n\r\n')[1]
+            xml = response.split('charset=UTF-8\r\n\r\n')[1]
             xml = ElementTree.fromstring(xml)
             elements = xml.find(body_tag).find(response_tag).find(return_tag)
         except:
