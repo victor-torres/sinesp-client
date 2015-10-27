@@ -14,8 +14,8 @@ If a vehicle with the specified plate was found, the server returns the followig
     
 - return_code
 - return_message
-- situation_code
-- situation_message
+- status_code
+- status_message
 - vehicle_chassis
 - vehicle_model
 - vehicle_brand

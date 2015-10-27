@@ -125,8 +125,8 @@ class SinespClient(object):
         elements = dict(
             return_code=elements.get('codigo_de_retorno'),
             return_message=elements.get('mensagem_de_retorno'),
-            situation_code=elements.get('codigo_da_situacao'),
-            situation_message=elements.get('situacao'),
+            status_code=elements.get('codigo_da_situacao'),
+            status_message=elements.get('situacao'),
             vehicle_chassis=elements.get('chassi'),
             vehicle_model=elements.get('modelo'),
             vehicle_brand=elements.get('marca'),
@@ -152,8 +152,8 @@ class SinespClient(object):
 
         - return_code
         - return_message
-        - situation_code
-        - situation_message
+        - status_code
+        - status_message
         - vehicle_chassis
         - vehicle_model
         - vehicle_brand
