@@ -28,7 +28,7 @@ setup(
     license='Copyright',
     description='SINESP Cidadão database client.',
     author='Victor Torres',
-    author_email='vpaivatorres@gmai.com',
+    author_email='vpaivatorres@gmail.com',
     url='https://bitbucket.org/victortorres/sinesp-client',
     packages=find_packages('src'),
     package_dir={'': 'src'},
