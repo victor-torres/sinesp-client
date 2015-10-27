@@ -12,20 +12,20 @@ SINESP Cidadão is a Brazilian public database of national vehicles. It's very u
 
 If a vehicle with the specified plate was found, the server returns the followign information which we'll repass in a dictionary format:
     
-- codigo_de_retorno (return code)
-- mensagem_de_retorno (return message)
-- codigo_da_situacao (situation code)
-- situacao (situation message)
-- modelo (vehicle model)
-- marca (vehicle brand)
-- cor (vehicle color)
-- ano (vehicle fabrication year)
-- ano_do_modelo (vehicle model year)
-- placa (vehicle plate)
-- data (consult date)
-- uf (Brazilian state/federal unity code)
-- municipio (Brazilian city)
-- chassi (vehicle chassis)
+- return_code
+- return_message
+- situation_code
+- situation_message
+- vehicle_chassis
+- vehicle_model
+- vehicle_brand
+- vehicle_color
+- vehicle_fabrication_year
+- vehicle_model_year
+- vehicle_plate
+- consult_date
+- city
+- federal_unity_code
 
 
 ## Why build a SINESP client?
@@ -56,7 +56,7 @@ result = sc.search('ABC1234')
 
 ### With proxy
 
-SINESP only accepts national web requests. If you don't have a valid Brazilian IP address you could use a web proxy (SOCKS5).
+SINESP only accepts national web requests. If you don't have a valid Brazilian IP address you can use a web proxy (SOCKS5).
 
 ```python
 from sinesp_client import SinespClient

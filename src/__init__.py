@@ -120,30 +120,50 @@ class SinespClient(object):
         except:
             raise InvalidResponse('Could not parse request response.')
 
-        return dict(((element.tag, element.text) for element in elements))
+        elements = dict(((element.tag, element.text) for element in elements))
+
+        elements = dict(
+            return_code=elements.get('codigo_de_retorno'),
+            return_message=elements.get('mensagem_de_retorno'),
+            situation_code=elements.get('codigo_da_situacao'),
+            situation_message=elements.get('situacao'),
+            vehicle_chassis=elements.get('chassi'),
+            vehicle_model=elements.get('modelo'),
+            vehicle_brand=elements.get('marca'),
+            vehicle_color=elements.get('cor'),
+            vehicle_fabrication_year=elements.get('ano'),
+            vehicle_model_year=elements.get('ano_do_modelo'),
+            vehicle_plate=elements.get('placa'),
+            consult_date=elements.get('data'),
+            city=elements.get('municipio'),
+            federal_unity_code=elements.get('uf'),
+        )
+
+        return elements
+
 
 
     def search(self, plate):
         """
         Searchs for vehicle plate.
-        
+
         If a vehicle with the specified plate was found, the server returns the
         followign information which we'll repass in a dictionary format:
-        
-        - codigo_de_retorno (return code)
-        - mensagem_de_retorno (return message)
-        - codigo_da_situacao (situation code)
-        - situacao (situation message)
-        - modelo (vehicle model)
-        - marca (vehicle brand)
-        - cor (vehicle color)
-        - ano (vehicle fabrication year)
-        - ano_do_modelo (vehicle model year)
-        - placa (vehicle plate)
-        - data (consult date)
-        - uf (Brazilian state/federal unity code)
-        - municipio (Brazilian city)
-        - chassi (vehicle chassis)
+
+        - return_code
+        - return_message
+        - situation_code
+        - situation_message
+        - vehicle_chassis
+        - vehicle_model
+        - vehicle_brand
+        - vehicle_color
+        - vehicle_fabrication_year
+        - vehicle_model_year
+        - vehicle_plate
+        - consult_date
+        - city
+        - federal_unity_code
         """
         content = self._content(plate)
 
