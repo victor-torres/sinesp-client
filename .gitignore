@@ -1,0 +1,4 @@
+*.pyc
+build/
+dist/
+src/sinesp_client.egg-info/
