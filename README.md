@@ -40,10 +40,10 @@ Hopefully they provide Android and iOS applications that make it possible to sea
 
 ## Usage
 
-### Requirements
+### Installing
 
 ```shell
-pip install -r requirements.txt
+python setup.py install
 ```
 
 ### Normal usage
