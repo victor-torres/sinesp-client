@@ -11,26 +11,26 @@ SINESP Cidadão is a Brazilian public database of national vehicles. It's very u
 ## Available data
 
 If a vehicle with the specified plate was found, the server returns the followign information which we'll repass in a dictionary format:
-    
+
 - return_code
 - return_message
 - status_code
 - status_message
-- vehicle_chassis
-- vehicle_model
-- vehicle_brand
-- vehicle_color
-- vehicle_fabrication_year
-- vehicle_model_year
-- vehicle_plate
-- consult_date
+- chassis
+- model
+- brand
+- color
+- year
+- model_year
+- plate
+- date
 - city
-- federal_unity_code
+- state
 
 
 ## Why build a SINESP client?
 
-We don't know why but government does not maintain a public API for this service. The only way to access this information is to access the SINESP site and answer captchas for every request. 
+We don't know why but government does not maintain a public API for this service. The only way to access this information is to access the SINESP site and answer captchas for every request.
 
 
 ## What have we done

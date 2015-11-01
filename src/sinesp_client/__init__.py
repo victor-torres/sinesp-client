@@ -13,7 +13,7 @@ SECRET = 'shienshenlhq'
 
 class RequestTimeout(Exception):
     pass
-    
+
 class InvalidResponse(Exception):
     pass
 
@@ -27,8 +27,8 @@ class SinespClient(object):
 
     We don't know why but government does not maintain a public API for this
     service. The only way to access this information is to access the SINESP
-    site and answer captchas for every request. Hopefully they provide Android 
-    and iOS applications that make it possible to search for vehicles without 
+    site and answer captchas for every request. Hopefully they provide Android
+    and iOS applications that make it possible to search for vehicles without
     needing to complete captcha tests. We have then reverse engineered their
     Android app APK file and discovered how to get our data without dealing
     with boring captchas.
@@ -39,7 +39,7 @@ class SinespClient(object):
         Brazilian IP address you could use a web proxy (SOCKS5).
         """
         if proxy_address and proxy_port:
-            socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5, 
+            socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5,
                                   proxy_address, proxy_port)
             socket.socket = socks.socksocket
             # Web proxies may be slower than regular connections.
@@ -104,8 +104,8 @@ class SinespClient(object):
 
         s.close()
         return response
-        
-        
+
+
     def _parse(self, response):
         """Parses XML result from HTTP response."""
         body_tag = '{http://schemas.xmlsoap.org/soap/envelope/}Body'
@@ -127,16 +127,16 @@ class SinespClient(object):
             return_message=elements.get('mensagem_de_retorno'),
             status_code=elements.get('codigo_da_situacao'),
             status_message=elements.get('situacao'),
-            vehicle_chassis=elements.get('chassi'),
-            vehicle_model=elements.get('modelo'),
-            vehicle_brand=elements.get('marca'),
-            vehicle_color=elements.get('cor'),
-            vehicle_fabrication_year=elements.get('ano'),
-            vehicle_model_year=elements.get('ano_do_modelo'),
-            vehicle_plate=elements.get('placa'),
-            consult_date=elements.get('data'),
+            chassis=elements.get('chassi'),
+            model=elements.get('modelo'),
+            brand=elements.get('marca'),
+            color=elements.get('cor'),
+            year=elements.get('ano'),
+            model_year=elements.get('ano_do_modelo'),
+            plate=elements.get('placa'),
+            date=elements.get('data'),
             city=elements.get('municipio'),
-            federal_unity_code=elements.get('uf'),
+            state=elements.get('uf'),
         )
 
         return elements
@@ -154,16 +154,16 @@ class SinespClient(object):
         - return_message
         - status_code
         - status_message
-        - vehicle_chassis
-        - vehicle_model
-        - vehicle_brand
-        - vehicle_color
-        - vehicle_fabrication_year
-        - vehicle_model_year
-        - vehicle_plate
-        - consult_date
+        - chassis
+        - model
+        - brand
+        - color
+        - year
+        - model_year
+        - plate
+        - date
         - city
-        - federal_unity_code
+        - state
         """
         content = self._content(plate)
 
@@ -171,7 +171,7 @@ class SinespClient(object):
             response = self._request(content)
         except socket.timeout:
             raise RequestTimeout('Request has timed out.')
-        
+
         if not response:
             return dict()
 
