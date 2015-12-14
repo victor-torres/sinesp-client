@@ -152,11 +152,7 @@ class SinespClient(object):
         - city
         - state
         """
-        try:
-            response = self._request(plate).content
-        except socket.timeout:
-            raise RequestTimeout('Request has timed out.')
-
+        response = self._request(plate).content
         if not response:
             return dict()
 
