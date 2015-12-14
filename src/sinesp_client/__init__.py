@@ -51,7 +51,8 @@ class SinespClient(object):
     def _token(self, plate):
         """Generates SHA1 token as HEX based on specified and secret key."""
         plate_and_secret = '%s%s' % (plate, SECRET)
-        return hmac(plate_and_secret, plate, sha1).digest().encode('hex')
+        hmac_key = hmac(str(plate_and_secret), str(plate), sha1)
+        return hmac_key.digest().encode('hex')
 
 
     def _rand_coordinate(self, radius=2000):
