@@ -1,22 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" 
-               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<?xml version='1.0' encoding='utf-8'?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <soap:Header>
-    <dispositivo>GT-S1312L</dispositivo>
-    <nomeSO>Android</nomeSO>
-    <versaoAplicativo>1.1.1</versaoAplicativo>
-    <versaoSO>4.1.4</versaoSO>
-    <aplicativo>aplicativo</aplicativo>
-    <ip>177.206.169.90</ip>
-    <token>%s</token>
-    <latitude>%s</latitude>
-    <longitude>%s</longitude>
+    <b>iPhone</b>
+    <j/>
+    <i>%s</i>
+    <c>iPhone OS</c>
+    <e>SinespCidadao</e>
+    <f>10.0.0.1</f>
+    <g>%s</g>
+    <d>9.1</d>
+    <h>%s</h>
   </soap:Header>
-  
   <soap:Body>
     <webs:getStatus xmlns:webs="http://soap.ws.placa.service.sinesp.serpro.gov.br/">
-      <placa>%s</placa>
+      <a>%s</a>
     </webs:getStatus>
   </soap:Body>
 </soap:Envelope>

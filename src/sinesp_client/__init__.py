@@ -5,11 +5,10 @@ from xml.etree import ElementTree
 import math
 import os
 import random
-import socket
-import socks
+import requests
 
 URL = 'sinespcidadao.sinesp.gov.br'
-SECRET = 'shienshenlhq'
+SECRET = '7lYS859X6fhB5Ow'
 
 class RequestTimeout(Exception):
     pass
@@ -38,22 +37,21 @@ class SinespClient(object):
         SINESP only accepts national web requests. If you don't have a valid
         Brazilian IP address you could use a web proxy (SOCKS5).
         """
+        self._proxies = None
         if proxy_address and proxy_port:
-            socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5,
-                                  proxy_address, proxy_port)
-            socket.socket = socks.socksocket
-            # Web proxies may be slower than regular connections.
-            socket.setdefaulttimeout(30)
+            self._proxies = {"http": "http://%s:%s" % (
+                proxy_address, proxy_port)}
 
         # Read and store XML template for our HTTP request body.
         body_file = open(os.path.join(os.path.dirname(__file__), 'body.xml'))
-        self._body = body_file.read().replace('\n', ' ').replace('  ', '')
+        self._body_template = body_file.read()
         body_file.close()
 
 
     def _token(self, plate):
         """Generates SHA1 token as HEX based on specified and secret key."""
-        return hmac(SECRET, plate, sha1).digest().encode('hex')
+        plate_and_secret = '%s%s' % (plate, SECRET)
+        return hmac(plate_and_secret, plate, sha1).digest().encode('hex')
 
 
     def _rand_coordinate(self, radius=2000):
@@ -73,37 +71,27 @@ class SinespClient(object):
         return '%.7f' % (self._rand_coordinate() - 3.7506985)
 
 
-    def _content(self, plate):
-        """Generates HTTP request based on a given plate."""
+    def _body(self, plate):
+        """Populate XML request body with specific data."""
         token = self._token(plate)
         latitude = self._rand_latitude()
         longitude = self._rand_longitude()
-        # Filling our body template
-        body = self._body % (token, latitude, longitude, plate)
-        # General info
-        header = 'POST /sinesp-cidadao/ConsultaPlacaNovo27032014 HTTP/1.1\n'
-        host = 'Host: sinespcidadao.sinesp.gov.br\n'
-        # Content info
-        content_length = 'Content-Length: %d\n' % len(body)
-        content_type = ('Content-Type: application/x-www-form-urlencoded; '
-                        'charset=UTF-8\n\n')
-        # Joining everyone and building our HTTP request
-        return ''.join((header, host, content_length, content_type, body))
+        return self._body_template % (latitude, token, longitude, plate)
 
 
-    def _request(self, content):
+    def _request(self, plate):
         """Performs an HTTP request with a given content."""
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect((URL, 80))
-        s.send(content)
-        response = ''
-        buf = s.recv(32)
-        while len(buf):
-            response += buf
-            buf = s.recv(32)
-
-        s.close()
-        return response
+        url = ('http://sinespcidadao.sinesp.gov.br/sinesp-cidadao/'
+               'ConsultaPlacaNovo02102014')
+        data = self._body(plate)
+        headers = {
+            'Accept': '*/*',
+            'Accept-Encoding': 'gzip, deflate',
+            'Content-Length': '634',
+            'Content-Type': 'text/xml; charset=utf-8',
+            'Host': 'sinespcidadao.sinesp.gov.br',
+        }
+        return requests.post(url, data, headers, proxies=self._proxies)
 
 
     def _parse(self, response):
@@ -114,7 +102,7 @@ class SinespClient(object):
         return_tag = 'return'
 
         try:
-            xml = response.split('charset=UTF-8\r\n\r\n')[1]
+            xml = response.decode('latin-1').encode('utf-8')
             xml = ElementTree.fromstring(xml)
             elements = xml.find(body_tag).find(response_tag).find(return_tag)
         except:
@@ -142,7 +130,6 @@ class SinespClient(object):
         return elements
 
 
-
     def search(self, plate):
         """
         Searchs for vehicle plate.
@@ -165,10 +152,8 @@ class SinespClient(object):
         - city
         - state
         """
-        content = self._content(plate)
-
         try:
-            response = self._request(content)
+            response = self._request(plate).content
         except socket.timeout:
             raise RequestTimeout('Request has timed out.')
 
