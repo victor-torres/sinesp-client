@@ -24,12 +24,12 @@ def read(*names, **kwargs):
 
 setup(
     name='sinesp_client',
-    version='1.0',
+    version='1.1',
     license='Copyright',
     description='SINESP Cidadão database client.',
     author='Victor Torres',
     author_email='vpaivatorres@gmail.com',
-    url='https://bitbucket.org/victortorres/sinesp-client',
+    url='https://github.com/victor-torres/sinesp-client',
     packages=find_packages('src'),
     package_dir={'': 'src'},
     package_data={'sinesp_client': ['body.xml']},
@@ -37,6 +37,6 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'PySocks==1.5.6',
+        'requests==2.8.1',
     ]
 )
