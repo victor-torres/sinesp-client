@@ -112,16 +112,16 @@ class SinespClient(object):
         elements = dict(((element.tag, element.text) for element in elements))
 
         elements = dict(
-            return_code=elements.get('codigo_de_retorno'),
-            return_message=elements.get('mensagem_de_retorno'),
-            status_code=elements.get('codigo_da_situacao'),
+            return_code=elements.get('codigoRetorno'),
+            return_message=elements.get('mensagemRetorno'),
+            status_code=elements.get('codigoSituacao'),
             status_message=elements.get('situacao'),
             chassis=elements.get('chassi'),
             model=elements.get('modelo'),
             brand=elements.get('marca'),
             color=elements.get('cor'),
             year=elements.get('ano'),
-            model_year=elements.get('ano_do_modelo'),
+            model_year=elements.get('anoModelo'),
             plate=elements.get('placa'),
             date=elements.get('data'),
             city=elements.get('municipio'),
