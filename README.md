@@ -76,6 +76,10 @@ result = sc.search('ABC1234')
 
 Nota: Utilize valores de endereço e porta válidos.
 
+### Chamando um script Python através do PHP
+
+Atendendo a diversos pedidos que vêm chegando por e-mail, [neste artigo na Wiki do projeto](https://github.com/victor-torres/sinesp-client/wiki/Como-executar-o-código-Python-no-PHP) ensino a chamar um script simples feito em Python, que retorna os dados obtidos em formato JSON, e a acessar os dados obtidos através do PHP.
+
 ## Contribua
 
 O livre acesso a esses dados públicos permite que diversas aplicações sejam desenvolvidas, muitas delas com um potencial benefício social envolvido como retorno. Ajude a contribuir com o projeto:
