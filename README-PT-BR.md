@@ -70,7 +70,7 @@ O SINESP pode bloquear conexões vindas de fora do país. Se acontecer de você 
 
 ```python
 from sinesp_client import SinespClient
-sc = SinespClient(proxy_address=127.0.0.1, proxy_port=8080)
+sc = SinespClient(proxy_address='127.0.0.1', proxy_port=8080)
 result = sc.search('ABC1234')
 ```
 
