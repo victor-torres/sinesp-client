@@ -8,7 +8,7 @@ import random
 import requests
 
 URL = 'sinespcidadao.sinesp.gov.br'
-SECRET = '7lYS859X6fhB5Ow'
+SECRET = '3ktTqS63LBPlOT3WgFlk'
 
 class RequestTimeout(Exception):
     pass
