@@ -93,12 +93,19 @@ class SinespClient(object):
         date = self._date()
         return self._body_template % (latitude, token, uuid, longitude, date, plate)
 
+    def _captcha_cookie(self):
+        """Performs a captcha request and return the cookie."""
+        cookies = requests.get('http://sinespcidadao.sinesp.gov.br/sinesp-cidadao/captchaMobile.png').cookies
+        jsessionid = cookies.get('JSESSIONID')
+        return {'JSESSIONID': jsessionid}
+
 
     def _request(self, plate):
         """Performs an HTTP request with a given content."""
         url = ('http://sinespcidadao.sinesp.gov.br/sinesp-cidadao/'
                'ConsultaPlacaNovo02102014')
         data = self._body(plate)
+        cookies = self._captcha_cookie()
         headers = {
             'Accept': '*/*',
             'Accept-Encoding': 'gzip, deflate',
@@ -106,7 +113,7 @@ class SinespClient(object):
             'Content-Type': 'text/xml; charset=utf-8',
             'Host': 'sinespcidadao.sinesp.gov.br',
         }
-        return requests.post(url, data, headers, proxies=self._proxies)
+        return requests.post(url, data, headers, proxies=self._proxies, cookies=cookies)
 
 
     def _parse(self, response):
