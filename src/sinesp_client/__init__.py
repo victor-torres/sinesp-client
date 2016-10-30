@@ -6,9 +6,11 @@ import math
 import os
 import random
 import requests
+import uuid
+import datetime
 
 URL = 'sinespcidadao.sinesp.gov.br'
-SECRET = '7lYS859X6fhB5Ow'
+SECRET = '3ktTqS63LBPlOT3WgFlk'
 
 class RequestTimeout(Exception):
     pass
@@ -73,20 +75,37 @@ class SinespClient(object):
         """Generates random longitude."""
         return '%.7f' % (self._rand_coordinate() - 3.7506985)
 
+    def _uuid(self):
+        """Generates an RFC4122 Class 4 random UUID"""
+        return str(uuid.uuid4())
+
+    def _date(self):
+        """Returns the current date formatted as yyyy-MM-dd HH:mm:ss"""
+        return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
 
     def _body(self, plate):
         """Populate XML request body with specific data."""
         token = self._token(plate)
         latitude = self._rand_latitude()
         longitude = self._rand_longitude()
-        return self._body_template % (latitude, token, longitude, plate)
+        uuid = self._uuid()
+        date = self._date()
+        return self._body_template % (latitude, token, uuid, longitude, date, plate)
+
+    def _captcha_cookie(self):
+        """Performs a captcha request and return the cookie."""
+        cookies = requests.get('http://sinespcidadao.sinesp.gov.br/sinesp-cidadao/captchaMobile.png').cookies
+        jsessionid = cookies.get('JSESSIONID')
+        return {'JSESSIONID': jsessionid}
 
 
     def _request(self, plate):
         """Performs an HTTP request with a given content."""
         url = ('http://sinespcidadao.sinesp.gov.br/sinesp-cidadao/'
-               'ConsultaPlacaNovo02102014')
+               'mobile/consultar-placa')
         data = self._body(plate)
+        cookies = self._captcha_cookie()
         headers = {
             'Accept': '*/*',
             'Accept-Encoding': 'gzip, deflate',
@@ -94,7 +113,7 @@ class SinespClient(object):
             'Content-Type': 'text/xml; charset=utf-8',
             'Host': 'sinespcidadao.sinesp.gov.br',
         }
-        return requests.post(url, data, headers, proxies=self._proxies)
+        return requests.post(url, data, headers, proxies=self._proxies, cookies=cookies)
 
 
     def _parse(self, response):
