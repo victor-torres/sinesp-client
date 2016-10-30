@@ -1,4 +1,4 @@
-# SINESP Client
+# SINESP Client [![PyPI Version](https://img.shields.io/pypi/v/sinesp-client.svg)](https://pypi.python.org/pypi/sinesp-client)
 
 SINESP Client torna possível a consulta da base de dados do SINESP Cidadão sem a necessidade do preenchimento de captchas ou algum outro tipo de autenticação.
 
