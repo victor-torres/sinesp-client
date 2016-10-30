@@ -90,4 +90,8 @@ O livre acesso a esses dados públicos permite que diversas aplicações sejam d
 
 ## Autor
 
-Victor Torres <vpaivatorres@gmail.com>
+- Victor Torres [@victor-torres](https://github.com/victor-torres)
+
+## Contribuidores
+
+- Francesco Perrotti-Garcia [@fpg1503](https://github.com/fpg1503)
