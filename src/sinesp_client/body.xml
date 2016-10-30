@@ -6,12 +6,15 @@
     <b>iPhone</b>
     <j/>
     <i>%s</i>
+    <m>1204fdd387279490261aaf95a6567f64</m>
     <c>iPhone OS</c>
     <e>SinespCidadao</e>
     <f>10.0.0.1</f>
     <g>%s</g>
+    <k>%s</k>
     <d>9.1</d>
     <h>%s</h>
+    <l>%s</l>
   </soap:Header>
   <soap:Body>
     <webs:getStatus xmlns:webs="http://soap.ws.placa.service.sinesp.serpro.gov.br/">
