@@ -103,7 +103,7 @@ class SinespClient(object):
     def _request(self, plate):
         """Performs an HTTP request with a given content."""
         url = ('http://sinespcidadao.sinesp.gov.br/sinesp-cidadao/'
-               'ConsultaPlacaNovo02102014')
+               'mobile/consultar-placa')
         data = self._body(plate)
         cookies = self._captcha_cookie()
         headers = {
