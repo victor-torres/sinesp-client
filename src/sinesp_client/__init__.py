@@ -10,7 +10,8 @@ import uuid
 import datetime
 
 URL = 'sinespcidadao.sinesp.gov.br'
-SECRET = '3ktTqS63LBPlOT3WgFlk'
+SECRET = 'TRwf1iBwvCoSboSscGne'
+
 
 class RequestTimeout(Exception):
     pass
@@ -56,6 +57,7 @@ class SinespClient(object):
         plate_and_secret = bytes(plate_and_secret.encode('utf-8'))
         plate = plate.encode('utf-8')
         hmac_key = hmac(plate_and_secret, plate, sha1)
+        print(hmac_key.hexdigest())
         return hmac_key.hexdigest()
 
 
@@ -95,7 +97,7 @@ class SinespClient(object):
 
     def _captcha_cookie(self):
         """Performs a captcha request and return the cookie."""
-        cookies = requests.get('http://sinespcidadao.sinesp.gov.br/sinesp-cidadao/captchaMobile.png').cookies
+        cookies = requests.get('http://sinespcidadao.sinesp.gov.br/sinesp-cidadao/captchaMobile.png', proxies=self._proxies).cookies
         jsessionid = cookies.get('JSESSIONID')
         return {'JSESSIONID': jsessionid}
 
@@ -107,11 +109,13 @@ class SinespClient(object):
         data = self._body(plate)
         cookies = self._captcha_cookie()
         headers = {
-            'Accept': '*/*',
-            'Accept-Encoding': 'gzip, deflate',
-            'Content-Length': '634',
-            'Content-Type': 'text/xml; charset=utf-8',
+            'Accept': 'text/plain, */*; q=0.01',
+            'Cache-Control': 'no-cache',
+            'Content-Length': '661',
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
             'Host': 'sinespcidadao.sinesp.gov.br',
+            'User-Agent': 'SinespCidadao / 3.0.2.1 CFNetwork / 758.2.8 Darwin / 15.0.0',
+            'Connection':'close',
         }
         return requests.post(url, data, headers, proxies=self._proxies, cookies=cookies)
 

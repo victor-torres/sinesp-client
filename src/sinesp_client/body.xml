@@ -1,24 +1,21 @@
-<?xml version='1.0' encoding='utf-8'?>
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
-               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <soap:Header>
-    <b>iPhone</b>
-    <j/>
-    <i>%s</i>
-    <m>1204fdd387279490261aaf95a6567f64</m>
-    <c>iPhone OS</c>
-    <e>SinespCidadao</e>
-    <f>10.0.0.1</f>
-    <g>%s</g>
-    <k>%s</k>
-    <d>9.1</d>
-    <h>%s</h>
-    <l>%s</l>
-  </soap:Header>
-  <soap:Body>
-    <webs:getStatus xmlns:webs="http://soap.ws.placa.service.sinesp.serpro.gov.br/">
-      <a>%s</a>
-    </webs:getStatus>
-  </soap:Body>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<soap:Header>
+<b>samsung GT-I9192</b>
+<c>ANDROID</c>
+<d>4.4.2</d>
+<i>%s</i>
+<e>SinespCidadao</e>
+<f>10.0.0.1</f>
+<g>%s</g>
+<k>%s</k>
+<h>%s</h>
+<l>%s</l>
+<m>8797e74f0d6eb7b1ff3dc114d4aa12d3</m>
+</soap:Header>
+<soap:Body>
+<webs:getStatus xmlns:webs="http://soap.ws.placa.service.sinesp.serpro.gov.br/">
+<a>%s</a>
+</webs:getStatus>
+</soap:Body>
 </soap:Envelope>
