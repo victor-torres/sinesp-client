@@ -57,7 +57,6 @@ class SinespClient(object):
         plate_and_secret = bytes(plate_and_secret.encode('utf-8'))
         plate = plate.encode('utf-8')
         hmac_key = hmac(plate_and_secret, plate, sha1)
-        print(hmac_key.hexdigest())
         return hmac_key.hexdigest()
 
 
