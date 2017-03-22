@@ -96,14 +96,14 @@ class SinespClient(object):
 
     def _captcha_cookie(self):
         """Performs a captcha request and return the cookie."""
-        cookies = requests.get('http://sinespcidadao.sinesp.gov.br/sinesp-cidadao/captchaMobile.png', proxies=self._proxies).cookies
+        cookies = requests.get('https://sinespcidadao.sinesp.gov.br/sinesp-cidadao/captchaMobile.png', proxies=self._proxies, verify=False).cookies
         jsessionid = cookies.get('JSESSIONID')
         return {'JSESSIONID': jsessionid}
 
 
     def _request(self, plate):
         """Performs an HTTP request with a given content."""
-        url = ('http://sinespcidadao.sinesp.gov.br/sinesp-cidadao/'
+        url = ('https://sinespcidadao.sinesp.gov.br/sinesp-cidadao/'
                'mobile/consultar-placa')
         data = self._body(plate)
         cookies = self._captcha_cookie()
@@ -116,7 +116,7 @@ class SinespClient(object):
             'User-Agent': 'SinespCidadao / 3.0.2.1 CFNetwork / 758.2.8 Darwin / 15.0.0',
             'Connection':'close',
         }
-        return requests.post(url, data, headers, proxies=self._proxies, cookies=cookies)
+        return requests.post(url, data, headers, proxies=self._proxies, cookies=cookies, verify=False)
 
 
     def _parse(self, response):
