@@ -97,3 +97,4 @@ O livre acesso a esses dados públicos permite que diversas aplicações sejam d
 - Giovani Generali [@giovanigenerali](https://github.com/giovanigenerali)
 - Francesco Perrotti-Garcia [@fpg1503](https://github.com/fpg1503)
 - William Monteiro [@monteirosk](https://github.com/monteirosk)
+- Marcos Said
