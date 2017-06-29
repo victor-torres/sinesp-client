@@ -10,7 +10,7 @@ import uuid
 import datetime
 
 URL = 'sinespcidadao.sinesp.gov.br'
-SECRET = 'TRwf1iBwvCoSboSscGne'
+SECRET = 'XvAmRTGhQchFwzwduKYK'
 
 
 class RequestTimeout(Exception):
@@ -104,7 +104,7 @@ class SinespClient(object):
     def _request(self, plate):
         """Performs an HTTP request with a given content."""
         url = ('https://sinespcidadao.sinesp.gov.br/sinesp-cidadao/'
-               'mobile/consultar-placa')
+               'mobile/consultar-placa/v2')
         data = self._body(plate)
         cookies = self._captcha_cookie()
         headers = {
