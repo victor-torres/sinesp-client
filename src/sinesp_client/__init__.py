@@ -42,7 +42,7 @@ class SinespClient(object):
         """
         self._proxies = None
         if proxy_address and proxy_port:
-            self._proxies = {"http": "http://%s:%s" % (
+            self._proxies = {"https": "https://%s:%s" % (
                 proxy_address, proxy_port)}
 
         # Read and store XML template for our HTTP request body.
