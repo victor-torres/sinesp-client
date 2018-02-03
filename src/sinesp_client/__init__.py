@@ -9,6 +9,7 @@ import requests
 import uuid
 import datetime
 
+
 URL = 'cidadao.sinesp.gov.br'
 SECRET = 'Mw6HqdLgQsX41xAGZgsF'
 
