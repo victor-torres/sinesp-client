@@ -6,7 +6,6 @@ import math
 import os
 import random
 import requests
-import uuid
 import datetime
 
 
@@ -77,10 +76,6 @@ class SinespClient(object):
         """Generates random longitude."""
         return '%.7f' % (self._rand_coordinate() - 3.7506985)
 
-    def _uuid(self):
-        """Generates an RFC4122 Class 4 random UUID"""
-        return str(uuid.uuid4())
-
     def _date(self):
         """Returns the current date formatted as yyyy-MM-dd HH:mm:ss"""
         return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -91,7 +86,6 @@ class SinespClient(object):
         token = self._token(plate)
         latitude = self._rand_latitude()
         longitude = self._rand_longitude()
-        uuid = self._uuid()
         date = self._date()
         return self._body_template % (latitude, token, longitude, date, plate)
 
