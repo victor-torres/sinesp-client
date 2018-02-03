@@ -9,8 +9,9 @@ import requests
 import uuid
 import datetime
 
-URL = 'sinespcidadao.sinesp.gov.br'
-SECRET = 'XvAmRTGhQchFwzwduKYK'
+
+URL = 'cidadao.sinesp.gov.br'
+SECRET = 'Mw6HqdLgQsX41xAGZgsF'
 
 
 class RequestTimeout(Exception):
@@ -92,7 +93,7 @@ class SinespClient(object):
         longitude = self._rand_longitude()
         uuid = self._uuid()
         date = self._date()
-        return self._body_template % (latitude, token, uuid, longitude, date, plate)
+        return self._body_template % (latitude, token, longitude, date, plate)
 
     def _captcha_cookie(self):
         """Performs a captcha request and return the cookie."""
@@ -103,7 +104,7 @@ class SinespClient(object):
 
     def _request(self, plate):
         """Performs an HTTP request with a given content."""
-        url = ('https://sinespcidadao.sinesp.gov.br/sinesp-cidadao/'
+        url = ('https://cidadao.sinesp.gov.br/sinesp-cidadao/'
                'mobile/consultar-placa/v2')
         data = self._body(plate)
         cookies = self._captcha_cookie()
