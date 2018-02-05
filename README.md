@@ -99,4 +99,5 @@ O livre acesso a esses dados públicos permite que diversas aplicações sejam d
 - William Monteiro [@monteirosk](https://github.com/monteirosk)
 - Ricardo Tominaga [@ricardotominaga](https://github.com/ricardotominaga)
 - Pedro Vilela [@pedrovilela](https://github.com/pedrovilela)
+- Lúcio Corrêa [@luciocorrea](https://github.com/luciocorrea)
 - Marcos Said
