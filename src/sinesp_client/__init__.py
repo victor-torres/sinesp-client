@@ -35,7 +35,7 @@ class SinespClient(object):
     Android app APK file and discovered how to get our data without dealing
     with boring captchas.
     """
-    def __init__(self, proxy_address=None, proxy_port=None):
+    def __init__(self, proxy_address=None, proxy_port=None, timeout=None):
         """
         SINESP only accepts national web requests. If you don't have a valid
         Brazilian IP address you could use a web proxy (SOCKS5).
@@ -49,6 +49,7 @@ class SinespClient(object):
         body_file = open(os.path.join(os.path.dirname(__file__), 'body.xml'))
         self._body_template = body_file.read()
         body_file.close()
+        self._timeout = timeout
 
 
     def _token(self, plate):
@@ -111,7 +112,7 @@ class SinespClient(object):
             'User-Agent': 'SinespCidadao / 3.0.2.1 CFNetwork / 758.2.8 Darwin / 15.0.0',
             'Connection':'close',
         }
-        return requests.post(url, data, headers, proxies=self._proxies, cookies=cookies, verify=False)
+        return requests.post(url, data, headers, proxies=self._proxies, cookies=cookies, verify=False, timeout=self._timeout)
 
 
     def _parse(self, response):
