@@ -21,7 +21,7 @@ def read(*names, **kwargs):
 
 setup(
     name='sinesp_client',
-    version='1.13',
+    version='1.14',
     license='Copyright',
     description='SINESP Cidadão database client.',
     author='Victor Torres',
