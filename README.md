@@ -2,7 +2,10 @@
 
 SINESP Client torna possível a consulta da base de dados do SINESP Cidadão sem a necessidade do preenchimento de captchas ou algum outro tipo de autenticação.
 
-[![Make a donation](https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=54V3L3LBX8VQU)
+
+# ⚠️ IMPORTANTE ⚠️
+
+Esta biblioteca não está mais sendo mantida. Por favor, não abir novas issues.
 
 
 ## O que é o SINESP
