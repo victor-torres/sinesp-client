@@ -5,7 +5,7 @@ SINESP Client torna possível a consulta da base de dados do SINESP Cidadão sem
 
 # ⚠️ IMPORTANTE ⚠️
 
-Esta biblioteca não está mais sendo mantida. Por favor, não abir novas issues.
+Esta biblioteca não está mais sendo mantida.
 
 
 ## O que é o SINESP
